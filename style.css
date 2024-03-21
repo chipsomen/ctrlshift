@@ -1,0 +1,39 @@
+@import url('https://fonts.cdnfonts.com/css/dash-horizon');
+
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+
+#navbar, #items{
+    width: 100vw;
+    height: 10vh;
+    background-color: rgb(60, 60, 60);
+    display: flex;
+    align-items: center;
+}
+
+#items {
+    justify-content: end;
+    position: relative;
+    right: 30px
+}
+
+#navbar p {
+    margin: 0; padding: 0;
+    display: inline-block;
+    margin-left: 30px;
+    color: white;
+}
+
+.title {
+    font-family: 'Dash Horizon';
+    font-size: 45px;
+    font-weight: normal;
+    z-index: 1;
+}
+
+#menu {
+    font-size: 60px;
+}
