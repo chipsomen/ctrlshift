@@ -1,0 +1,15 @@
+@import url('https://fonts.cdnfonts.com/css/dash-horizon');
+
+@font-face {
+    font-family: 'Earth Orbiter Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Earth Orbiter Regular'), url('fonts/earthorbiter.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Conthrax SemiBold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Conthrax SemiBold'), url('fonts/conthrax-sb.woff') format('woff');
+}
