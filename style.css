@@ -6,12 +6,25 @@ body {
     background-size: cover;
 }
 
-#navbar, #items{
+#navbar, #items, #border-area, #border-area div{
     width: 100vw;
     height: 10vh;
-    background-color: rgb(0, 0, 0, 0);
     display: flex;
     align-items: center;
+}
+
+#border-area {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 30vw;
+    border-bottom-right-radius: 300px;
+}
+
+#border-area div {
+    background-color: rgba(0, 0, 0, 0.372);
+    width: 26vw; height: 12vh;
+    position: absolute;
+    border-bottom-right-radius: 300px;
+    z-index: -1;
 }
 
 #items {
