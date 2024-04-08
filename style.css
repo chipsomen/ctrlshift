@@ -6,6 +6,11 @@ body {
     background-size: cover;
 }
 
+a, a:visited {
+    text-decoration: none !important;
+    color: white;
+}
+
 #navbar, #items, #border-area, #border-area div{
     width: 100vw;
     height: 10vh;
@@ -34,13 +39,13 @@ body {
     right: 30px
 }
 
-#items p {
+#items p, a {
     font-family: 'Earth Orbiter Regular';
     font-size: 25px;
     transition-duration: 0.5s;
 }
 
-#items p:hover{
+a:hover {
     color: rgb(121, 170, 255);
     letter-spacing: 1mm;
 }
