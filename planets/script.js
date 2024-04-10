@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 
 const renderer = new THREE.WebGLRenderer();
 // const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
@@ -14,8 +17,18 @@ const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHei
 const worldAmbience = new THREE.AmbientLight(0x222222);
 scene.add(worldAmbience);
 const planets = {};
-const textureLoader = new THREE.TextureLoader();
 const assetLoader = new GLTFLoader().setPath('../models/solarsystem/');
+const textureLoader = new THREE.TextureLoader();
+const renderScene = new RenderPass(scene, camera);
+const composer = new EffectComposer(renderer);
+const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    1.6,
+    0.1,
+    0.1
+);
+composer.addPass(renderScene);
+composer.addPass(bloomPass);
 
 
 camera.position.set(250, 250, 250);
@@ -41,7 +54,8 @@ function planetConstructor(size, planetType, pos, tilt, axial){
         const orbit = new THREE.Mesh(
             new THREE.TorusGeometry(pos, 3, 8, 100),
             new THREE.MeshBasicMaterial({
-                color: 0xFFFFFF
+                color: 0xFFFFFF,
+                emissiveIntensity: 0
             })
         );
         orbit.rotateX(Math.PI/2 + tilt);
@@ -61,29 +75,21 @@ function planetConstructor(size, planetType, pos, tilt, axial){
 const sun = new THREE.Mesh(
     new THREE.SphereGeometry(125, 30, 30),
     new THREE.MeshStandardMaterial({
-        color: 0xff6f00,
-        emissive: 0xff6f00,
-        emissiveIntensity: 1
+        color: 0xffffff,
+        emissive: 0xffe38f,
+        emissiveIntensity: 2
     })
 );
 
-planetConstructor(5, 'mercury', 500, 0.001, 0);
-planetConstructor(15, 'venus', 1000, -0.001, 177.4);
+// planetConstructor(5, 'mercury', 500, 0.001, 0);
+// planetConstructor(15, 'venus', 1000, -0.001, 177.4);
 planetConstructor(20, 'earth', 1500, 0.002, 23.4);
-planetConstructor(10, 'mars', 2000, 0.001, 25.2);
-planetConstructor(45, 'jupiter', 3000, -0.0015, 3.1);
-planetConstructor(40, 'saturn', 3750, 0.003, 26.7);
+// planetConstructor(10, 'mars', 2000, 0.001, 25.2);
+// planetConstructor(45, 'jupiter', 3000, -0.0015, 3.1);
+// planetConstructor(40, 'saturn', 3750, 0.003, 26.7);
 planetConstructor(22, 'uranus', 4250, 0.001, 97.8);
-planetConstructor(22, 'neptune', 4750,-0.0025, 28.3);
+planetConstructor(22, 'neptune', 4750,-0.0025, 28.3); // please reimport
 
-// mercury.position.x = 500;
-// venus.position.x = 1000;
-// earth.position.x = 1500;
-// mars.position.x = 2000;
-// jupiter.position.x = 3000;
-// saturn.position.x = 3750;
-// uranus.position.x = 4250;
-// neptune.position.x = 4750;
 scene.add(sun);
 
 const raycaster = new THREE.Raycaster();
@@ -93,19 +99,20 @@ window.addEventListener('mousemove', function(e){
     mousePos.y = - (e.clientY / window.innerHeight) * 2 + 1;
 });
 
-renderer.setAnimationLoop(() => {
+const animate = () => {
     raycaster.setFromCamera(mousePos, camera);
     const intersects = raycaster.intersectObjects(scene.children);
-    if (intersects[0]){
-        if (intersects[0].object.position.x !== 0){
-            camera.position.set(
-                intersects[0].object.position.x * Math.cos(intersects[0].object.parent.rotation.y),
-                0,
-                intersects[0].object.position.x * Math.sin(intersects[0].object.parent.rotation.y)
-            );
-            console.log(`(${intersects[0].object.position.x * Math.cos(intersects[0].object.parent.rotation.y)},${intersects[0].object.position.x * Math.sin(intersects[0].object.parent.rotation.y)})`, intersects[0].object.parent.rotation.y)
-        }
-    }
+    intersects[0] ? console.log(intersects[0], intersects[0].object.name) : null;
+    // if (intersects[0]){
+    //     if (intersects[0].object.parent.position.x !== 0){
+    //         camera.position.set(
+    //             intersects[0].object.position.x * Math.cos(intersects[0].object.parent.rotation.y),
+    //             0,
+    //             intersects[0].object.position.x * Math.sin(intersects[0].object.parent.rotation.y)
+    //         );
+    //         console.log(`(${intersects[0].object.position.x * Math.cos(intersects[0].object.parent.rotation.y)},${intersects[0].object.position.x * Math.sin(intersects[0].object.parent.rotation.y)})`, intersects[0].object.parent.rotation.y)
+    //     }
+    // }
 
     sun.rotateY(0.001);
     // planets.mercury ? planets.mercury.anchor.rotateY(0.004) : null; planets.mercury ? planets.mercury.obj.rotateY(0.002) : null;
@@ -150,8 +157,13 @@ renderer.setAnimationLoop(() => {
         planets.neptune.obj.rotateY(0.002);
     }
 
-    renderer.render(scene, camera);
-});
+    // renderer.render(scene, camera);
+    composer.render();
+    requestAnimationFrame(animate);
+};
+
+animate();
+
 window.addEventListener('resize', function(){
     camera.aspect = window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
