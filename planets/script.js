@@ -106,8 +106,8 @@ function planetConstructor(size, planetType, pos, tilt, axial){
                 color: 0xFFFFFF,
             })
         );
-        // orbit.rotateX(Math.PI/2 + tilt * 10);
-        // orbit.rotateZ(Math.PI/2 - tilt * 10);
+        orbit.rotateX(Math.PI/2 + tilt);
+        orbit.rotateZ(Math.PI/2 - tilt);
         scene.add(orbit);
 
         const planetObj = new THREE.Object3D();
