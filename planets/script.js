@@ -116,6 +116,7 @@ function planetConstructor(size, planetType, pos, tilt, axial){
         scene.add(planetObj);
 
         planets[planetType] = {obj: model, anchor: planetObj, orbit: orbit};
+        Load.updateProgress();
     }, null, (err) => {
         console.error(err);
     });
@@ -132,6 +133,24 @@ const sun = new THREE.Mesh(
 sun.layers.toggle(BLOOM_SCENE);
 
 // load planets
+const Load = {count: 0};
+Load.checkProgress = () => {
+    if (Load.count == 8){
+        let seconds = 1;
+        let lScreen = document.getElementsByClassName('loader-container')[0];
+
+        lScreen.style.transition = `opacity ${seconds}s ease`;
+        lScreen.style.opacity = 0;
+        setTimeout(() => {
+            lScreen.style.display = "none";
+        }, seconds * 1000);
+    }
+}
+Load.updateProgress = () => {
+    Load.count++
+    Load.checkProgress();
+}
+
 planetConstructor(5, 'mercury', 500, 0.001, 0);
 planetConstructor(15, 'venus', 1000, -0.001, 177.4);
 planetConstructor(20, 'earth', 1500, 0.002, 23.4);
@@ -146,7 +165,8 @@ scene.add(sun);
 // mouse detection
 const raycaster = new THREE.Raycaster();
 const mousePos = new THREE.Vector2();
-window.addEventListener('mousemove', function(e){
+mousePos.x = 100; mousePos.y = 100;
+window.addEventListener('click', function(e){
     mousePos.x = (e.clientX / window.innerWidth) * 2 - 1;
     mousePos.y = - (e.clientY / window.innerHeight) * 2 + 1;
 });
@@ -154,7 +174,8 @@ window.addEventListener('mousemove', function(e){
 const animate = () => {
     raycaster.setFromCamera(mousePos, camera);
     const intersects = raycaster.intersectObjects(scene.children);
-    // intersects[0] ? console.log(intersects[0], intersects[0].object.name) : null;
+    intersects[0] ? console.log(intersects[0], intersects[0].object.name) : null;
+    // console.log(intersects)
     // if (intersects[0]){
     //     if (intersects[0].object.parent.position.x !== 0){
     //         camera.position.set(
