@@ -77,7 +77,7 @@ function restoreMaterial(obj){
 
 
 // initialize camera and objects
-camera.position.set(1000, 1000, 1000);
+camera.position.set(0, 12000, 0);
 
 const axesHelper = new THREE.AxesHelper(800);
 scene.add(axesHelper);
