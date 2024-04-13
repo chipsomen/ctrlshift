@@ -105,7 +105,9 @@ function planetConstructor(size, planetType, pos, tilt, axial){
             //     cloud.scale.set(size*5, size*5, size*5);
             //     cloud.position.x = pos;
             //     cloud.rotateZ = axial * Math.PI/180;
+            //     cloud.children[0].material.color = 0xFFFFFF;
             //     model.add(cloud);
+            //     console.log(cloud);
             // });
         };
 
@@ -190,6 +192,10 @@ for (let i = 0; i < document.getElementsByClassName('card').length; i++){
 
 function setTarget(id){
     target = id;
+    for (const object in planets){
+        scene.remove(planets[object].orbit);
+    }
+    scene.add(planets[id].orbit)
 }
 
 

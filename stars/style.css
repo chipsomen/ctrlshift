@@ -1,0 +1,36 @@
+body {
+    padding: 0; margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.textbox {
+    width: 300px;
+    max-height: 800px;
+    margin: 20px;
+    padding: 20px;
+    background-image: linear-gradient(to bottom right,
+    #080e1b, #021436);
+    color: rgb(193, 193, 193);
+    border-radius: 10px;
+    border-width: 10px;
+    border-color: rgb(245, 240, 240);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.textbox h {
+    font-size: 24px;
+    font-family: Earth Orbiter Regular;
+}
+
+canvas {
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+}
