@@ -1,5 +1,7 @@
 body {
     padding: 0; margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .loader-container {
@@ -75,9 +77,10 @@ canvas {
 }
 
 .container {
-    display: flex;
+    display: none;
     flex-direction: column;
-    align-items: center;
+    padding-left: 30px;
+    overflow-y: auto;
 }
 
 .card {

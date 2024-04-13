@@ -144,7 +144,7 @@ sun.layers.toggle(BLOOM_SCENE);
 // load planets
 const Load = {count: 0};
 Load.checkProgress = () => {
-    if (Load.count == 8){
+    if (Load.count == 1){
         let seconds = 1;
         let lScreen = document.getElementsByClassName('loader-container')[0];
 
@@ -152,6 +152,7 @@ Load.checkProgress = () => {
         lScreen.style.opacity = 0;
         setTimeout(() => {
             lScreen.style.display = "none";
+            document.getElementsByClassName('container')[0].style.display = 'flex';
         }, seconds * 1000);
     }
 }
@@ -179,35 +180,40 @@ window.addEventListener('mousemove', function(e){
     mousePos.x = (e.clientX / window.innerWidth) * 2 - 1;
     mousePos.y = - (e.clientY / window.innerHeight) * 2 + 1;
 });
+let target;
+
+for (let i = 0; i < document.getElementsByClassName('card').length; i++){
+    document.getElementsByClassName('card')[i].addEventListener('click', (e) => {
+        setTarget(document.getElementsByClassName('card')[i].id)
+    });
+}
+
+function setTarget(id){
+    target = id;
+}
 
 
 const animate = () => {
     raycaster.setFromCamera(mousePos, camera);
-    const intersects = raycaster.intersectObjects(scene.children);
+    if (target && planets[target]){
+        const worldPos = new THREE.Vector3();
+        planets[target].obj.getWorldPosition(worldPos);
 
-
-    if (intersects[0]){
-        if (intersects[0].object.name){
-            const worldPos = new THREE.Vector3();
-            intersects[0].object.parent.getWorldPosition(worldPos);
-
-            camera.position.set(0,0,0);
-            camera.lookAt(worldPos);
-            const scaleFactor = 0.65;
-            const angle = Math.atan2(worldPos.z, worldPos.x);
-            const radius = Math.sqrt(Math.pow(worldPos.x, 2) + Math.pow(worldPos.z, 2)) * scaleFactor;
-            let x1 = radius * Math.cos(angle); let y1 = radius * Math.sin(angle);
-            if (worldPos.x/Math.abs(worldPos.x) !== x1/Math.abs(x1)){
-                x1 *= -1;
-            }
-            if (worldPos.z/Math.abs(worldPos.z) !== y1/Math.abs(y1)){
-                y1 *= -1;
-            }
-            worldPos.set(x1, 30, y1);
-            camera.position.set(worldPos.x, worldPos.y, worldPos.z);
-            camera.updateMatrix();
+        camera.position.set(0,0,0);
+        camera.lookAt(worldPos);
+        const scaleFactor = 0.65;
+        const angle = Math.atan2(worldPos.z, worldPos.x);
+        const radius = Math.sqrt(Math.pow(worldPos.x, 2) + Math.pow(worldPos.z, 2)) * scaleFactor;
+        let x1 = radius * Math.cos(angle); let y1 = radius * Math.sin(angle);
+        if (worldPos.x/Math.abs(worldPos.x) !== x1/Math.abs(x1)){
+            x1 *= -1;
         }
-        
+        if (worldPos.z/Math.abs(worldPos.z) !== y1/Math.abs(y1)){
+            y1 *= -1;
+        }
+        worldPos.set(x1, 30, y1);
+        camera.position.set(worldPos.x, worldPos.y, worldPos.z);
+        camera.updateMatrix();
     }
 
     // animation
