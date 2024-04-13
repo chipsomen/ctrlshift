@@ -7,7 +7,7 @@ import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 import {ShaderPass} from 'three/addons/postprocessing/ShaderPass.js';
 
-// initialize renderer
+// initialize renderer and settings
 const renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -19,12 +19,14 @@ document.body.appendChild(renderer.domElement);
 
 // initialize scenes and passes
 const scene = new THREE.Scene();
+const stars = '../images/skybox2.png';
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 75000);
 const worldAmbience = new THREE.AmbientLight(0x222222);
 scene.add(worldAmbience);
 const planets = {};
 const assetLoader = new GLTFLoader().setPath('../models/solarsystem/');
-const textureLoader = new THREE.TextureLoader();
+const textureLoader = new THREE.CubeTextureLoader();
+// scene.background = textureLoader.load([stars, stars, stars, stars, stars, stars]);
 const renderScene = new RenderPass(scene, camera);
 const composer = new EffectComposer(renderer);
 const outputPass = new OutputPass();
@@ -99,6 +101,7 @@ function planetConstructor(size, planetType, pos, tilt, axial){
         if (planetType == 'earth') {
             model.children[0].material.emissiveIntensity = 10;
         };
+        console.log(model);
 
         const orbit = new THREE.Mesh(
             new THREE.TorusGeometry(pos, 3, 8, 100),
@@ -166,26 +169,40 @@ scene.add(sun);
 const raycaster = new THREE.Raycaster();
 const mousePos = new THREE.Vector2();
 mousePos.x = 100; mousePos.y = 100;
-window.addEventListener('click', function(e){
+window.addEventListener('mousemove', function(e){
     mousePos.x = (e.clientX / window.innerWidth) * 2 - 1;
     mousePos.y = - (e.clientY / window.innerHeight) * 2 + 1;
 });
 
+
 const animate = () => {
     raycaster.setFromCamera(mousePos, camera);
     const intersects = raycaster.intersectObjects(scene.children);
-    intersects[0] ? console.log(intersects[0], intersects[0].object.name) : null;
-    // console.log(intersects)
-    // if (intersects[0]){
-    //     if (intersects[0].object.parent.position.x !== 0){
-    //         camera.position.set(
-    //             intersects[0].object.position.x * Math.cos(intersects[0].object.parent.rotation.y),
-    //             0,
-    //             intersects[0].object.position.x * Math.sin(intersects[0].object.parent.rotation.y)
-    //         );
-    //         console.log(`(${intersects[0].object.position.x * Math.cos(intersects[0].object.parent.rotation.y)},${intersects[0].object.position.x * Math.sin(intersects[0].object.parent.rotation.y)})`, intersects[0].object.parent.rotation.y)
-    //     }
-    // }
+
+
+    if (intersects[0]){
+        if (intersects[0].object.name){
+            const worldPos = new THREE.Vector3();
+            intersects[0].object.parent.getWorldPosition(worldPos);
+
+            camera.position.set(0,0,0);
+            camera.lookAt(worldPos);
+            const scaleFactor = 0.8;
+            const angle = Math.atan2(worldPos.z, worldPos.x);
+            const radius = Math.sqrt(Math.pow(worldPos.x, 2) + Math.pow(worldPos.z, 2)) * scaleFactor;
+            let x1 = radius * Math.cos(angle); let y1 = radius * Math.sin(angle);
+            if (worldPos.x/Math.abs(worldPos.x) !== x1/Math.abs(x1)){
+                x1 *= -1;
+            }
+            if (worldPos.z/Math.abs(worldPos.z) !== y1/Math.abs(y1)){
+                y1 *= -1;
+            }
+            worldPos.set(x1, 30, y1);
+            camera.position.set(worldPos.x, worldPos.y, worldPos.z);
+            camera.updateMatrix();
+        }
+        
+    }
 
     // animation
     sun.rotateY(0.001);
