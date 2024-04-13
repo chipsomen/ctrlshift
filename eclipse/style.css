@@ -31,3 +31,34 @@ p {
     text-decoration: underline;
     text-decoration-thickness: 3px;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.textbox {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    padding: 20px;
+    background-image: linear-gradient(to bottom right,
+    #080e1b, #021436);
+    color: rgb(193, 193, 193);
+    border-radius: 10px;
+    border-width: 10px;
+    border-color: rgb(245, 240, 240);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: monospace;
+}
+
+.textbook h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.textbook p {
+    font-size: 18px;
+    line-height: 1.5;
+}
