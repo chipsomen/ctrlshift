@@ -19,14 +19,13 @@ document.body.appendChild(renderer.domElement);
 
 // initialize scenes and passes
 const scene = new THREE.Scene();
-const stars = '../images/skybox2.png';
+const stars = '../images/skybox.png';
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 75000);
 const worldAmbience = new THREE.AmbientLight(0x222222);
 scene.add(worldAmbience);
 const planets = {};
 const assetLoader = new GLTFLoader().setPath('../models/solarsystem/');
 const textureLoader = new THREE.CubeTextureLoader();
-// scene.background = textureLoader.load([stars, stars, stars, stars, stars, stars]);
 const renderScene = new RenderPass(scene, camera);
 const composer = new EffectComposer(renderer);
 const outputPass = new OutputPass();
@@ -91,6 +90,7 @@ const PLH = new THREE.PointLightHelper(pointLight);
 scene.add(PLH);
 window.createImageBitmap = undefined;
 
+
 function planetConstructor(size, planetType, pos, tilt, axial){
     assetLoader.load(`${planetType}.glb`, (gltf) => {
         const model = gltf.scene;
@@ -100,8 +100,14 @@ function planetConstructor(size, planetType, pos, tilt, axial){
         console.log(`loaded ${planetType}`);
         if (planetType == 'earth') {
             model.children[0].material.emissiveIntensity = 10;
+            // assetLoader.load(`clouds.glb`, (gltf) => {
+            //     const cloud = gltf.scene;
+            //     cloud.scale.set(size*5, size*5, size*5);
+            //     cloud.position.x = pos;
+            //     cloud.rotateZ = axial * Math.PI/180;
+            //     model.add(cloud);
+            // });
         };
-        console.log(model);
 
         const orbit = new THREE.Mesh(
             new THREE.TorusGeometry(pos, 3, 8, 100),
@@ -187,7 +193,7 @@ const animate = () => {
 
             camera.position.set(0,0,0);
             camera.lookAt(worldPos);
-            const scaleFactor = 0.8;
+            const scaleFactor = 0.65;
             const angle = Math.atan2(worldPos.z, worldPos.x);
             const radius = Math.sqrt(Math.pow(worldPos.x, 2) + Math.pow(worldPos.z, 2)) * scaleFactor;
             let x1 = radius * Math.cos(angle); let y1 = radius * Math.sin(angle);
