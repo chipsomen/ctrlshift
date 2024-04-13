@@ -34,3 +34,15 @@ canvas {
     top: 0px;
     z-index: -1;
 }
+
+button {
+    background-color: rgb(96, 147, 255);
+    border: 2px solid black;
+    font-family: monospace;
+    border-radius: 3px;
+    transition-duration: 0.5s;
+}
+
+button:hover {
+    background-color: rgb(0, 85, 141);
+}

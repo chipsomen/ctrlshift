@@ -32,13 +32,11 @@ composer.addPass(bloomPass);
 
 camera.position.set(20, 20, 20);
 
-const axesHelper = new THREE.AxesHelper(15);
-scene.add(axesHelper);
 const orbit = new OrbitControls(camera, renderer.domElement);
 orbit.update();
 
 const sun = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 30, 30),
+    new THREE.SphereGeometry(10, 30, 30),
     new THREE.MeshStandardMaterial({
         color: 0xffffff,
         emissive: 0xffe38f,
@@ -46,6 +44,83 @@ const sun = new THREE.Mesh(
     })
 );
 scene.add(sun);
+const starClasses = [
+    {
+        type: "O",
+        luminosity: "30,000 - 1,000,000 Solar Luminosities",
+        temp: ">30,000K (Extremely Hot)",
+        size: "Very Large",
+        lifespan: "Short (<10M)",
+        color: 0x0000FF
+    },
+    {
+        type: "B",
+        luminosity: "25 - 30,000 Solar Luminosities",
+        temp: "10,000K - 30,000K (Hot)",
+        size: "Large",
+        lifespan: "Moderate (10M - 100M)",
+        color: 0x9ACD32 
+    },
+    {
+        type: "A",
+        luminosity: "5 - 25 Solar Luminosities",
+        temp: "7,500K - 10,000K (Hot)",
+        size: "Medium to Large",
+        lifespan: "Moderate (100M - 1B)",
+        color: 0xFFFF00 
+    },
+    {
+        type: "F",
+        luminosity: "1.5 - 5 Solar Luminosities",
+        temp: "6,000K - 7,500K (Hot)",
+        size: "Medium",
+        lifespan: "Long (1B - 10B)",
+        color: 0xFFA500
+    },
+    {
+        type: "G",
+        luminosity: "0.6 - 1.5 Solar Luminosities",
+        temp: "5,000K - 6,000K (Moderate)",
+        size: "Medium",
+        lifespan: "Long (10B+)",
+        color: 0xFFD700
+    },
+    {
+        type: "K",
+        luminosity: "0.08 - 0.6 Solar Luminosities",
+        temp: "3,500K - 5,000K (Cool)",
+        size: "Small to Medium",
+        lifespan: "Very Long (10B+)",
+        color: 0xFFA07A 
+    },
+    {
+        type: "M",
+        luminosity: "0.01 - 0.08 Solar Luminosities",
+        temp: "<3,500K (Cool)",
+        size: "Small",
+        lifespan: "Extremely Long (100B+)",
+        color: 0xFF0000 
+    }
+];
+let index = 0;
+
+function showNextStar() {
+    const star = starClasses[index];
+    document.getElementById("classification").querySelectorAll("p")[0].innerText = `Spectral Type: ${star.type}`;
+    document.getElementById("classification").querySelectorAll("p")[1].innerText = `Luminosity: ${star.luminosity}`;
+    document.getElementById("classification").querySelectorAll("p")[2].innerText = `Temperature: ${star.temp}`;
+    document.getElementById("classification").querySelectorAll("p")[3].innerText = `Size: ${star.size}`;
+    document.getElementById("classification").querySelectorAll("p")[4].innerText = `Lifespan: ${star.lifespan}`;
+    sun.material.emissive.set(star.color)
+    index = (index + 1) % starClasses.length;
+    console.log(sun.material)
+
+}
+
+document.getElementById('nextStar').addEventListener('click', () => {
+    showNextStar();
+})
+
 
 const animate = () => {
     composer.render();
