@@ -86,7 +86,7 @@ h1 {
     transition-duration: 0.5s;
 }
 
-#inner {
+.inner {
     width: 1.5rem;
     height: 1.5rem;
     background-color: transparent;
@@ -98,7 +98,7 @@ h1 {
     opacity: 0.5;
 }
 
-.infoButton:hover #inner{
+.infoButton:hover .inner{
     background-color: rgb(101, 178, 255);
     transform: scale(0.2);
     rotate: 180deg;
@@ -129,5 +129,38 @@ h1 {
 }
 
 #aboutContainer .infoButton:hover + #about {
+    transform: translate(0, -2vh);
+}
+
+#playButton {
+    position: absolute;
+    bottom: 5vh; right: 2.5vw;
+    flex-direction: column-reverse;
+}
+
+#playButton .infoButton {
+    border: 0.1rem solid rgb(255, 73, 73);
+}
+
+#playButton .infoButton:hover .inner {
+    background-color: rgb(255, 73, 73);
+}
+
+/* .active {
+    transform: scale(0.8);
+    rotate: -180deg;
+} */
+
+/* #playButton .infoButton:active .inner {
+    transform: scale(0.8);
+    rotate: -180deg;
+} */
+
+#playButton .textbox {
+    background-image: linear-gradient(to bottom right,
+    #1b0808, #360202);
+}
+
+#playButton .infoButton:hover + #play {
     transform: translate(0, -2vh);
 }

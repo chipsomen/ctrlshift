@@ -40,11 +40,9 @@ const sun = new THREE.Mesh(
     })
 );
 const moon = new THREE.Mesh(
-    new THREE.SphereGeometry(2.49, 30, 30),
+    new THREE.SphereGeometry(2.45, 30, 30),
     new THREE.MeshBasicMaterial({
-        color: 0x000000,
-        emissive: 0xffe38f,
-        emissiveIntensity: 1.5
+        color: 0x000000
     })
 );
 const moonObj = new THREE.Object3D();
@@ -64,6 +62,21 @@ function fadeIn(el, s){
     el.style.opacity = 1;
 }
 
+let active = false;
+function toggle(){
+    let toggle = document.querySelector('#playButton .infoButton .inner')
+    active = !active
+    if (active) {
+        toggle.style.transform = "scale(0.8)";
+        toggle.style['background-color'] = "rgb(255, 73, 73)";
+    } else {
+        toggle.style.transform = "";
+        toggle.style['background-color'] = "";
+    }
+}
+
+document.querySelector('#playButton .infoButton').addEventListener('click', toggle);
+
 const animate = () => {
     let rotateSpeed = 0.005;
     let title = document.getElementById('header')
@@ -78,6 +91,14 @@ const animate = () => {
             fadeIn(info[i], 1)
         }
     }
+
+    if (active){
+        moonObj.rotateX(-rotateSpeed/5);
+        if (moonObj.rotation.x <= -Math.PI/2){
+            moonObj.rotation.x = Math.PI/2;
+        }
+    }
+
     composer.render();
     requestAnimationFrame(animate);
 };
