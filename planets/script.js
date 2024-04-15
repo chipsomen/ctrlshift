@@ -1,4 +1,4 @@
-import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import * as THREE from 'https://www.unpkg.com/three@0.163.0/build/three.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
@@ -21,7 +21,7 @@ document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 const stars = '../images/skybox.png';
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 75000);
-const worldAmbience = new THREE.AmbientLight(0x222222);
+const worldAmbience = new THREE.AmbientLight(0x999999);
 scene.add(worldAmbience);
 const planets = {};
 const assetLoader = new GLTFLoader().setPath('../models/solarsystem/');
@@ -193,9 +193,9 @@ for (let i = 0; i < document.getElementsByClassName('card').length; i++){
 function setTarget(id){
     target = id;
     for (const object in planets){
-        scene.remove(planets[object].orbit);
+        planets[object].orbit.material.color.set(0x222222)
     }
-    scene.add(planets[id].orbit)
+    planets[id].orbit.material.color.set(0xFFFFFF)
 }
 
 
@@ -206,19 +206,19 @@ const animate = () => {
         planets[target].obj.getWorldPosition(worldPos);
 
         camera.position.set(0,0,0);
-        camera.lookAt(worldPos);
-        const scaleFactor = 0.65;
+        const scaleFactor = 0.95;
         const angle = Math.atan2(worldPos.z, worldPos.x);
         const radius = Math.sqrt(Math.pow(worldPos.x, 2) + Math.pow(worldPos.z, 2)) * scaleFactor;
-        let x1 = radius * Math.cos(angle); let y1 = radius * Math.sin(angle);
-        if (worldPos.x/Math.abs(worldPos.x) !== x1/Math.abs(x1)){
-            x1 *= -1;
-        }
-        if (worldPos.z/Math.abs(worldPos.z) !== y1/Math.abs(y1)){
-            y1 *= -1;
-        }
+        let x1 = radius * Math.cos(angle - Math.PI/16) - Math.PI/8; let y1 = radius * Math.sin(angle - Math.PI/16);
+        // if (worldPos.x/Math.abs(worldPos.x) !== x1/Math.abs(x1)){
+        //     x1 *= -1;
+        // }
+        // if (worldPos.z/Math.abs(worldPos.z) !== y1/Math.abs(y1)){
+        //     y1 *= -1;
+        // }
         worldPos.set(x1, 30, y1);
         camera.position.set(worldPos.x, worldPos.y, worldPos.z);
+        camera.lookAt(planets[target].obj.getWorldPosition(new THREE.Vector3()));
         camera.updateMatrix();
     }
 
