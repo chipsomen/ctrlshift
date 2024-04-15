@@ -95,7 +95,7 @@
 <script id="vertexshader" type="vertex">
     varying vec2 vUv;
     void main() {
-        vUv = uv;
+        vUv = uv;78
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
 </script>
@@ -107,5 +107,5 @@
         gl_FragColor = (texture2D(baseTexture, vUv) + vec4(1.0) * texture2D(bloomTexture, vUv));
     }
 </script>
-<script src="/planets/script.js" type="module"></script>
+<script src="./planets/script.js" type="module"></script>
 </html>
