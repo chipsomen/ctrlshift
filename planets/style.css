@@ -169,3 +169,39 @@ span {
 #scrolldiv::-webkit-scrollbar-thumb:hover {
     background: #3b3fc4;
 }
+
+.slider {
+    width: 300px;
+    height: 20px;
+    background-color: black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.slider-bar {
+    width: 100%;
+    height: 85%;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+
+.slider-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+.slider-bar::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
