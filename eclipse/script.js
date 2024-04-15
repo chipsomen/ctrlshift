@@ -67,12 +67,16 @@ function fadeIn(el, s){
 const animate = () => {
     let rotateSpeed = 0.005;
     let title = document.getElementById('header')
+    let info = document.getElementsByClassName('infoContainer');
     if (moonObj.rotation.x - rotateSpeed > 0){
         moonObj.rotateX(-rotateSpeed);
     } else if (moonObj.rotation.x > 0){
         moonObj.rotation.x = 0;
     } else if (moonObj.rotation.x == 0 && title.style.opacity !== 0){
         fadeIn(title, 1);
+        for (let i = 0; i < info.length; i++){
+            fadeIn(info[i], 1)
+        }
     }
     composer.render();
     requestAnimationFrame(animate);
