@@ -75,16 +75,29 @@ function toggle(){
     }
 }
 
+const textbox = document.getElementsByClassName('textbox');
+
+for (let i = 0; i < textbox.length; i++){
+    textbox[i].addEventListener('transititonend', (e) => {
+        if (e.propertyName === 'opacity') {
+            if (textbox.style.opacity === '0') {
+                textbox.style.visibility = 'hidden';
+            }
+        } 
+    })
+}
 document.querySelector('#playButton .infoButton').addEventListener('click', toggle);
+let intro = false;
 
 const animate = () => {
     let rotateSpeed = 0.005;
     let title = document.getElementById('header')
     let info = document.getElementsByClassName('infoContainer');
-    if (moonObj.rotation.x - rotateSpeed > 0){
+    if (moonObj.rotation.x - rotateSpeed > 0 && !intro){
         moonObj.rotateX(-rotateSpeed);
-    } else if (moonObj.rotation.x > 0){
+    } else if (moonObj.rotation.x > 0 && !intro){
         moonObj.rotation.x = 0;
+        intro = true;
     } else if (moonObj.rotation.x == 0 && title.style.opacity !== 0){
         fadeIn(title, 1);
         for (let i = 0; i < info.length; i++){

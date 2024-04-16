@@ -1,5 +1,6 @@
 body {
     padding: 0; margin: 0;
+    user-select: none;
 }
 
 canvas {
@@ -27,7 +28,7 @@ h1 {
 
 #header h1 {
     color: white;
-    font-size: 50px;
+    font-size: 3rem;
     font-weight: 400;
 }
 
@@ -52,7 +53,6 @@ h1 {
     font-family: Earth Orbiter Regular;
 
     position: relative;
-    display: block;
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s;
 }
@@ -63,7 +63,7 @@ h1 {
 }
 
 .text {
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.5;
     font-family: monospace;
 }
@@ -106,7 +106,7 @@ h1 {
 }
 
 .infoButton:hover + .textbox {
-    display: block;
+    visibility: visible;
     opacity: 1;
     transform: translate(0, 2.5vh);
 }
@@ -146,16 +146,6 @@ h1 {
     background-color: rgb(255, 73, 73);
 }
 
-/* .active {
-    transform: scale(0.8);
-    rotate: -180deg;
-} */
-
-/* #playButton .infoButton:active .inner {
-    transform: scale(0.8);
-    rotate: -180deg;
-} */
-
 #playButton .textbox {
     background-image: linear-gradient(to bottom right,
     #1b0808, #360202);
@@ -163,4 +153,108 @@ h1 {
 
 #playButton .infoButton:hover + #play {
     transform: translate(0, -2vh);
+}
+
+#back {
+    position: absolute;
+    left: 2vw; top: 4vh;
+    background-color: transparent;
+    border-left: 0.1rem solid white;
+    border-bottom: 0.1rem solid white;
+    width: 1.5rem; height: 1.5rem;
+    rotate: 45deg;
+}
+
+#back a {
+    display: block;
+    width: 5vw; height: 5vh;
+}
+
+#backInner {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: white;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+#backText {
+    position: relative;
+    left: 1vw; top: -2.75vw;
+    font-family: Earth Orbiter Regular;
+    rotate: -45deg;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s;
+}
+
+#backText p {
+    font-size: 1rem;
+    color: white;
+}
+
+#back:hover #backInner {
+    background-image: linear-gradient(
+        to bottom left,
+        black 50%,
+        white 50%
+    );
+    opacity: 1;
+    transform: scale(0.5);
+}
+
+#back:hover #backText {
+    opacity: 1;
+}
+
+#back:active #backInner {
+    transform: translate(-0.05vw, 0.05vw);
+}
+
+@media only screen and (max-width: 600px) {
+    html {
+      font-size: 10px;
+    }
+
+    #playButton .infoButton:active .inner {
+        background-color: rgb(255, 73, 73);
+    }
+
+    .textbox {
+        width: 20vh;
+    }
+
+    .infoButton:active{
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    
+    .infoButton:active .inner{
+        background-color: rgb(101, 178, 255);
+        transform: scale(0.2);
+        rotate: 180deg;
+        display: block;
+    }
+
+    #pastContainer {
+        position: absolute;
+        left: 0.5vw; top: 15vh;
+    }
+    
+    #nextContainer {
+        position: absolute;
+        right: 0.5vw; top: 15vh;
+    }
+    
+    #aboutContainer {
+        position: absolute;
+        left: 0.5vw;
+        flex-direction: column-reverse;
+    }
+
+    #back {
+        left: 2vh;
+        top: 8.5vh;
+    }
+    
 }
