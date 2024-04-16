@@ -1,5 +1,6 @@
 body {
-    padding: 0; margin: 0;
+    padding: 0;
+    margin: 0;
     user-select: none;
 }
 
@@ -7,10 +8,6 @@ canvas {
     position: absolute;
     top: 0px;
     z-index: -1;
-}
-
-div {
-    background-color: white;
 }
 
 h1 {
@@ -43,7 +40,7 @@ h1 {
     margin: 20px;
     padding: 20px;
     background-image: linear-gradient(to bottom right,
-    #080e1b, #021436);
+            #080e1b, #021436);
     color: rgb(193, 193, 193);
     border-radius: 10px;
     border-width: 10px;
@@ -93,19 +90,19 @@ h1 {
     transition-duration: 0.5s;
 }
 
-.infoButton:hover{
+.infoButton:hover {
     transform: scale(1.5);
     opacity: 0.5;
 }
 
-.infoButton:hover .inner{
+.infoButton:hover .inner {
     background-color: rgb(101, 178, 255);
     transform: scale(0.2);
     rotate: 180deg;
     display: block;
 }
 
-.infoButton:hover + .textbox {
+.infoButton:hover+.textbox {
     visibility: visible;
     opacity: 1;
     transform: translate(0, 2.5vh);
@@ -128,13 +125,14 @@ h1 {
     flex-direction: column-reverse;
 }
 
-#aboutContainer .infoButton:hover + #about {
+#aboutContainer .infoButton:hover+#about {
     transform: translate(0, -2vh);
 }
 
 #playButton {
     position: absolute;
-    bottom: 5vh; right: 2.5vw;
+    bottom: 5vh;
+    right: 2.5vw;
     flex-direction: column-reverse;
 }
 
@@ -148,72 +146,74 @@ h1 {
 
 #playButton .textbox {
     background-image: linear-gradient(to bottom right,
-    #1b0808, #360202);
+            #1b0808, #360202);
 }
 
-#playButton .infoButton:hover + #play {
+#playButton .infoButton:hover+#play {
     transform: translate(0, -2vh);
 }
 
-#back {
+#backWrapper {
     position: absolute;
-    left: 2vw; top: 4vh;
-    background-color: transparent;
-    border-left: 0.1rem solid white;
-    border-bottom: 0.1rem solid white;
-    width: 1.5rem; height: 1.5rem;
-    rotate: 45deg;
+    left: 2.5vw; top: 8vh;
+    width: 0px; height: 0px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    flex-direction: column;
+    z-index: 3;
 }
 
-#back a {
-    display: block;
-    width: 5vw; height: 5vh;
-}
-
-#backInner {
+#back {
     width: 1.5rem;
     height: 1.5rem;
-    background-color: white;
-    opacity: 0;
-    transition-duration: 0.5s;
+    background-color: transparent;
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    rotate: 45deg;
+    transition: transform 0.5s;
 }
 
-#backText {
-    position: relative;
-    left: 1vw; top: -2.75vw;
-    font-family: Earth Orbiter Regular;
-    rotate: -45deg;
+#innerBack {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100px;
     background-color: transparent;
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s;
 }
 
-#backText p {
-    font-size: 1rem;
-    color: white;
-}
-
-#back:hover #backInner {
+#back2 {
+    width: 1rem;
+    height: 1rem;
+    rotate: 45deg;
+    margin-right: 0rem;
     background-image: linear-gradient(
         to bottom left,
-        black 50%,
+        transparent 50%,
         white 50%
     );
-    opacity: 1;
-    transform: scale(0.5);
 }
 
-#back:hover #backText {
-    opacity: 1;
+#text {
+    font-family: monospace;
+    color: white;
+    background-color: transparent;
 }
 
-#back:active #backInner {
-    transform: translate(-0.05vw, 0.05vw);
+#back:hover {
+    transform: scale(1.5);
+}
+
+#back:hover+#innerBack {
+    transform: translate(0, 2vh);
+    opacity: 1;
 }
 
 @media only screen and (max-width: 600px) {
     html {
-      font-size: 10px;
+        font-size: 10px;
     }
 
     #playButton .infoButton:active .inner {
@@ -224,12 +224,12 @@ h1 {
         width: 20vh;
     }
 
-    .infoButton:active{
+    .infoButton:active {
         transform: scale(1.5);
         opacity: 0.5;
     }
-    
-    .infoButton:active .inner{
+
+    .infoButton:active .inner {
         background-color: rgb(101, 178, 255);
         transform: scale(0.2);
         rotate: 180deg;
@@ -238,14 +238,16 @@ h1 {
 
     #pastContainer {
         position: absolute;
-        left: 0.5vw; top: 15vh;
+        left: 0.5vw;
+        top: 15vh;
     }
-    
+
     #nextContainer {
         position: absolute;
-        right: 0.5vw; top: 15vh;
+        right: 0.5vw;
+        top: 15vh;
     }
-    
+
     #aboutContainer {
         position: absolute;
         left: 0.5vw;
@@ -256,5 +258,5 @@ h1 {
         left: 2vh;
         top: 8.5vh;
     }
-    
+
 }

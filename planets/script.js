@@ -210,12 +210,6 @@ const animate = () => {
         const angle = Math.atan2(worldPos.z, worldPos.x);
         const radius = Math.sqrt(Math.pow(worldPos.x, 2) + Math.pow(worldPos.z, 2)) * scaleFactor;
         let x1 = radius * Math.cos(angle - Math.PI/16) - Math.PI/8; let y1 = radius * Math.sin(angle - Math.PI/16);
-        // if (worldPos.x/Math.abs(worldPos.x) !== x1/Math.abs(x1)){
-        //     x1 *= -1;
-        // }
-        // if (worldPos.z/Math.abs(worldPos.z) !== y1/Math.abs(y1)){
-        //     y1 *= -1;
-        // }
         worldPos.set(x1, 30, y1);
         camera.position.set(worldPos.x, worldPos.y, worldPos.z);
         camera.lookAt(planets[target].obj.getWorldPosition(new THREE.Vector3()));
