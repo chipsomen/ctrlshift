@@ -10,7 +10,6 @@ body {
 
 .textbox {
     width: 300px;
-    max-height: 800px;
     margin: 20px;
     padding: 20px;
     background-image: linear-gradient(to bottom right,
@@ -22,12 +21,7 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     font-family: monospace;
-    font-size: 16px;
-}
-
-.textbox h {
-    font-size: 24px;
-    font-family: Earth Orbiter Regular;
+    font-size: 1rem;
 }
 
 canvas {
@@ -46,4 +40,78 @@ button {
 
 button:hover {
     background-color: rgb(0, 85, 141);
+}
+
+#backWrapper {
+    position: absolute;
+    left: 2.5vw; top: 8vh;
+    width: 0px; height: 0px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    flex-direction: column;
+    z-index: 3;
+}
+
+#back {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: transparent;
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    rotate: 45deg;
+    transition: transform 0.5s;
+}
+
+#back a {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+#innerBack {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100px;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s;
+}
+
+#back2 {
+    width: 1rem;
+    height: 1rem;
+    rotate: 45deg;
+    margin-right: 0rem;
+    background-image: linear-gradient(
+        to bottom left,
+        transparent 50%,
+        white 50%
+    );
+}
+
+#text {
+    font-family: monospace;
+    color: white;
+    background-color: transparent;
+}
+
+#back:hover {
+    transform: scale(1.5);
+}
+
+#back:hover+#innerBack {
+    transform: translate(0, 2vh);
+    opacity: 1;
+}
+
+@media only screen and (max-width: 600px) {
+    html {
+        font-size: 10px;
+    }
+
+    .textbox {
+        width: 20vh;
+    }
 }

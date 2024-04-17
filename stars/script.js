@@ -1,5 +1,6 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
@@ -17,6 +18,7 @@ document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 75000);
 const worldAmbience = new THREE.AmbientLight(0x222222);
+const assetLoader = new GLTFLoader().setPath('../models/stars/');
 scene.add(worldAmbience);
 const textureLoader = new THREE.TextureLoader();
 const renderScene = new RenderPass(scene, camera);
@@ -35,15 +37,24 @@ camera.position.set(20, 20, 20);
 const orbit = new OrbitControls(camera, renderer.domElement);
 orbit.update();
 
-const sun = new THREE.Mesh(
-    new THREE.SphereGeometry(10, 30, 30),
-    new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        emissive: 0xffe38f,
-        emissiveIntensity: 1.5
-    })
-);
-scene.add(sun);
+// const sun = new THREE.Mesh(
+//     new THREE.SphereGeometry(10, 30, 30),
+//     new THREE.MeshStandardMaterial({
+//         color: 0xffffff,
+//         emissive: 0xffe38f,
+//         emissiveIntensity: 1.5
+//     })
+// );
+// scene.add(sun);
+
+assetLoader.load('star.glb', (gltf) => {
+    const model = gltf.scene;
+    model.scale.set(10, 10, 10);
+    console.log(model)
+    model.children[0].material.emissiveIntensity = 1.2;
+    scene.add(model);
+});
+
 const starClasses = [
     {
         type: "O",
@@ -111,7 +122,7 @@ function showNextStar() {
     document.getElementById("classification").querySelectorAll("p")[2].innerText = `Temperature: ${star.temp}`;
     document.getElementById("classification").querySelectorAll("p")[3].innerText = `Size: ${star.size}`;
     document.getElementById("classification").querySelectorAll("p")[4].innerText = `Lifespan: ${star.lifespan}`;
-    sun.material.emissive.set(star.color)
+    // sun.material.emissive.set(star.color)
     index = (index + 1) % starClasses.length;
     console.log(sun.material)
 
