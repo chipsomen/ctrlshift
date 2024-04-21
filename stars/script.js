@@ -152,13 +152,6 @@ function toggleGlossary(){
         glossary.style.opacity = 0;
     }
     activeGlossary = !activeGlossary;
-
-    // if (glossary.style.opacity == 0){
-    //     glossary.style.visibility = "visible";
-    //     glossary.style.opacity = 1;
-    // } else {
-    //     glossary.style.opacity = 0;
-    // }
 }
 
 function showUI(){

@@ -2,36 +2,50 @@ body {
     padding: 0;
     margin: 0;
     user-select: none;
+    display: flex;
+    justify-content: center;
 }
 
 canvas {
     position: absolute;
-    top: 0px;
+    top: 0;
     z-index: -1;
 }
 
-h1 {
+#nav {
+    width: 20rem;
+    height: 3rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+#nav span {
+    position: relative;
+    right: 0;
+    color: white;
+    font-size: 1.5rem;
+    margin: 0.5rem;
+    transition-duration: 0.5s;
     font-family: Earth Orbiter Regular;
 }
 
-#header {
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: 5vh;
-    opacity: 0;
+#nav span:hover {
+    color: #34a8eb;
 }
 
-#header h1 {
+#nav p {
     color: white;
-    font-size: 3rem;
-    font-weight: 400;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
+    margin: 4rem;
+    min-width: 5rem;
+    text-align: center;
+    font-family: Earth Orbiter Regular;
 }
 
 .textbox {
@@ -65,7 +79,6 @@ h1 {
     display: flex;
     align-items: center;
     flex-direction: column;
-    opacity: 0;
 }
 
 .infoButton {
@@ -103,55 +116,29 @@ h1 {
     transform: translate(0, 2.5vh);
 }
 
-#pastContainer {
+#scopeBio {
     position: absolute;
-    left: 2.5vw;
+    top: 10vh; left: 2vw;
 }
 
-#nextContainer {
+#scopeTechniques {
     position: absolute;
-    right: 2.5vw;
-}
-
-#aboutContainer {
-    position: absolute;
-    left: 2.5vw;
-    bottom: 5vh;
+    bottom: 10vh; left: 2vw;
     flex-direction: column-reverse;
 }
 
-#aboutContainer .infoButton:hover+#about {
-    transform: translate(0, -2vh);
-}
-
-#playButton {
+#scopeModel {
     position: absolute;
-    bottom: 5vh;
-    right: 2.5vw;
+    bottom: 10vh; right: 2vw;
     flex-direction: column-reverse;
-}
-
-#playButton .infoButton {
-    border: 0.1rem solid rgb(255, 73, 73);
-}
-
-#playButton .infoButton:hover .inner {
-    background-color: rgb(255, 73, 73);
-}
-
-#playButton .textbox {
-    background-image: linear-gradient(to bottom right,
-            #1b0808, #360202);
-}
-
-#playButton .infoButton:hover+#play {
-    transform: translate(0, -2vh);
 }
 
 #backWrapper {
     position: absolute;
-    left: 2.5vw; top: 8vh;
-    width: 0px; height: 0px;
+    left: 2.5vw;
+    top: 8vh;
+    width: 0px;
+    height: 0px;
     /* display: flex;
     justify-content: center;
     align-items: center; */
@@ -190,11 +177,9 @@ h1 {
     height: 1rem;
     rotate: 45deg;
     margin-right: 0rem;
-    background-image: linear-gradient(
-        to bottom left,
-        transparent 50%,
-        white 50%
-    );
+    background-image: linear-gradient(to bottom left,
+            transparent 50%,
+            white 50%);
 }
 
 #text {
@@ -217,51 +202,12 @@ h1 {
         font-size: 10px;
     }
 
-    body {
-        user-select: none;
-    }
-
-    #playButton .infoButton:active .inner {
-        background-color: rgb(255, 73, 73);
-    }
-
     .textbox {
         width: 20vh;
-    }
-
-    .infoButton:active {
-        transform: scale(1.5);
-        opacity: 0.5;
-    }
-
-    .infoButton:active .inner {
-        background-color: rgb(101, 178, 255);
-        transform: scale(0.2);
-        rotate: 180deg;
-        display: block;
-    }
-
-    #pastContainer {
-        position: absolute;
-        left: 0.5vw;
-        top: 15vh;
-    }
-
-    #nextContainer {
-        position: absolute;
-        right: 0.5vw;
-        top: 15vh;
-    }
-
-    #aboutContainer {
-        position: absolute;
-        left: 0.5vw;
-        flex-direction: column-reverse;
     }
 
     #back {
         left: 2vh;
         top: 8.5vh;
     }
-
 }
