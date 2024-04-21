@@ -8,6 +8,21 @@
     <link rel="stylesheet" href="../fonts.css">
 </head>
 <body>
+    <div id="dataWrapper" class="gone">
+        <div id="menu">
+            <p>&#8801;</p>
+        </div>
+        <div class="textbox" id="classification">
+            <h>STAR</h>
+            <p>Spectral Type:</p>
+            <p>Luminosity:</p>
+            <p>Temperature:</p>
+            <p>Size:</p>
+            <p>Lifespan:</p>
+            <a href="#" id="nextStar" class="button secondary">NEXT STAR</a>
+        </div>
+    </div>
+
     <div id="backWrapper">
         <div id="back"><a href="../index.html"></a></div>
         <div id="innerBack">
@@ -22,9 +37,32 @@
         <div class="infoButton">
             <div class="inner"></div>
         </div>
-        <div class="textbox" id="past">
+        <div class="textbox">
             <h2>STAR DESCRIPTION</h2>
-            <p class="text">Begin cycling through stars to view their description!</p>
+            <p class="text" id="desc">Begin cycling through stars to view their description!</p>
+        </div>
+    </div>
+
+    <div class="infoContainer" id="glossary">
+        <div class="clickOuter" id="glossaryButton">
+            <div class="clickInner"></div>
+          </div>
+        <div class="textbox" id="glossaryBox">
+            <h2>GLOSSARY</h2>
+            <h1>SPECTRAL TYPE</h1>
+            <p class="text">A classification system that categorizes stars based on the characteristics of their spectra, which provides information about their temperature, chemical composition, and luminosity.</p>
+            <hr>
+            <h1>LUMINOSITY</h1>
+            <p class="text">The total amount of energy emitted by a star per unit of time, often measured relative to the luminosity of the Sun. The sun has exactly one Solar Luminosity (L&#9737;), which is known to be 3.83 &times; 10<sup>26</sup> watts.</p>
+            <hr>
+            <h1>TEMPERATURE</h1>
+            <p class="text">The degree of heat of a star, typically measured in Kelvin, which influences its color and spectral characteristics.</p>
+            <hr>
+            <h1>SIZE</h1>
+            <p class="text">The physical dimensions of a star, measured in Solar Radius (R&#9737;). Similar to Solar Luminosities, the Sun is exactly one Solar radii, which is known to be 432,288 miles.</p>
+            <hr>
+            <h1>LIFESPAN</h1>
+            <p class="text">The duration for which a star exists and remains active, determined by its mass and energy production mechanisms, ranging from millions to billions of years.</p>
         </div>
     </div>
 
@@ -33,21 +71,6 @@
             <h>STAR CLASSIFICATION</h>
             <p>Welcome to the Star Classification Simulator! Here you can learn about different types of stars, the role stars play in our universe, and see how they would look!</p>
             <a href="#" id="go" class="button secondary">GO!</a>
-        </div>
-    </div>
-
-    <div id="dataWrapper" class="gone">
-        <div id="menu">
-            <p>&#8801;</p>
-        </div>
-        <div class="textbox" id="classification">
-            <h>STAR</h>
-            <p>Spectral Type:</p>
-            <p>Luminosity:</p>
-            <p>Temperature:</p>
-            <p>Size:</p>
-            <p>Lifespan:</p>
-            <a href="#" id="nextStar" class="button secondary">NEXT STAR</a>
         </div>
     </div>
 </body>

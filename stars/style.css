@@ -1,5 +1,6 @@
 body {
-    padding: 0; margin: 0;
+    padding: 0;
+    margin: 0;
     user-select: none;
 }
 
@@ -8,6 +9,7 @@ body {
     justify-content: center;
 }
 
+h2,
 h {
     font-family: Earth Orbiter Regular;
     font-size: 1.5rem;
@@ -18,7 +20,7 @@ h {
     margin: 20px;
     padding: 20px;
     background-image: linear-gradient(to bottom right,
-    #080e1b, #021436);
+            #080e1b, #021436);
     color: rgb(193, 193, 193);
     border-radius: 10px;
     border-width: 10px;
@@ -55,24 +57,26 @@ button:hover {
 }
 
 #dataWrapper {
+    position: absolute;
+    top: 40vh; right: 2vw;
     background-color: transparent;
     display: flex;
     align-items: center;
     flex-direction: column;
     flex-direction: row-reverse;
-    position: relative;
-    top: 30vh;
 }
 
 #menu {
     margin-right: 2rem;
     background-color: black;
     border: 2px solid white;
-    width: 5rem; height: 5rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 20;
 }
 
 #menu p {
@@ -83,7 +87,8 @@ button:hover {
 
 #popup {
     position: absolute;
-    width: 100vw; height: 80vh;
+    width: 100vw;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,15 +171,67 @@ button:hover {
     transform: translate(0, 2.5vh);
 }
 
+.clickOuter {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid white;
+    rotate: -45deg;
+    transition: opacity 0.5s ease, transform 0.5s, rotate 0.5s;
+}
+
+.clickInner {
+    width: inherit;
+    height: inherit;
+    background-color: white;
+    transform: scale(1.8);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s, rotate 0.5s;
+}
+
+.clickOuter:hover {
+    transform: scale(1.2);
+    rotate: -225deg;
+}
+
 #starData {
     position: absolute;
-    top: 20vh;
+    top: 10vh;
+}
+
+#glossary {
+    position: absolute;
+    top: 10vh;
+    right: 20vh;
+}
+
+#glossaryBox {
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
+#glossaryBox::-webkit-scrollbar {
+    width: 6px;
+}
+
+#glossaryBox::-webkit-scrollbar-track {
+    background: #000;
+}
+
+#glossaryBox::-webkit-scrollbar-thumb {
+    background: #252c58;
+    border-radius: 10px;
+}
+
+#glossaryBox::-webkit-scrollbar-thumb:hover {
+    background: #3b3fc4;
 }
 
 #backWrapper {
     position: absolute;
-    left: 2.5vw; top: 8vh;
-    width: 0px; height: 0px;
+    left: 2.5vw;
+    top: 8vh;
+    width: 0px;
+    height: 0px;
     /* display: flex;
     justify-content: center;
     align-items: center; */
@@ -213,11 +270,9 @@ button:hover {
     height: 1rem;
     rotate: 45deg;
     margin-right: 0rem;
-    background-image: linear-gradient(
-        to bottom left,
-        transparent 50%,
-        white 50%
-    );
+    background-image: linear-gradient(to bottom left,
+            transparent 50%,
+            white 50%);
 }
 
 #text {
@@ -235,16 +290,6 @@ button:hover {
     opacity: 1;
 }
 
-/* #about {
-    position: absolute;
-    top: 5vh;
-} */
-
-/* #classification {
-    position: absolute;
-    right: 2vw; top: 5vh;
-} */
-
 @media only screen and (max-width: 600px) {
     html {
         font-size: 10px;
@@ -252,5 +297,23 @@ button:hover {
 
     .textbox {
         width: 20vh;
+    }
+
+    #glossary {
+        top: 5vh; right: 18vw;
+    }
+
+    #dataWrapper {
+        top: 30vh;
+    }
+
+    #starData {
+        position: absolute;
+        flex-direction: column-reverse;
+        bottom: 5vh; right: 10vh;
+    }
+
+    #classification {
+        z-index: 30;
     }
 }
