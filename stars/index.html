@@ -18,20 +18,37 @@
         </div>
     </div>
 
-    <div class="textbox" id="about">
-        <h>STAR CLASSIFICATION</h>
-        <p>
-            Stars are essential for the universe's existence, serving as the cosmic engines that drive its evolution. They produce light, heat, and energy, which are crucial for sustaining life on planets like Earth. Through the process of nuclear fusion, stars forge heavier elements that form the building blocks of planets, moons, and life itself. Their gravitational influence shapes the structure of galaxies and the cosmic web. Stars also play a role in the formation of planetary systems, including our own solar system. Without stars, the universe would be a vastly different and uninhabitable place.
-        </p>
+    <div class="infoContainer" id="starData">
+        <div class="infoButton">
+            <div class="inner"></div>
+        </div>
+        <div class="textbox" id="past">
+            <h2>STAR DESCRIPTION</h2>
+            <p class="text">Begin cycling through stars to view their description!</p>
+        </div>
     </div>
-    <div class="textbox" id="classification">
-        <h>STAR</h>
-        <p>Spectral Type:</p>
-        <p>Luminosity:</p>
-        <p>Temperature:</p>
-        <p>Size:</p>
-        <p>Lifespan:</p>
-        <button id="nextStar">Next Star</button>
+
+    <div id="popup">
+        <div class="textbox" id="about">
+            <h>STAR CLASSIFICATION</h>
+            <p>Welcome to the Star Classification Simulator! Here you can learn about different types of stars, the role stars play in our universe, and see how they would look!</p>
+            <a href="#" id="go" class="button secondary">GO!</a>
+        </div>
+    </div>
+
+    <div id="dataWrapper" class="gone">
+        <div id="menu">
+            <p>&#8801;</p>
+        </div>
+        <div class="textbox" id="classification">
+            <h>STAR</h>
+            <p>Spectral Type:</p>
+            <p>Luminosity:</p>
+            <p>Temperature:</p>
+            <p>Size:</p>
+            <p>Lifespan:</p>
+            <a href="#" id="nextStar" class="button secondary">NEXT STAR</a>
+        </div>
     </div>
 </body>
 <script type="importmap">

@@ -1,4 +1,4 @@
-import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
@@ -32,28 +32,20 @@ const bloomPass = new UnrealBloomPass(
 composer.addPass(renderScene);
 composer.addPass(bloomPass);
 
-camera.position.set(20, 20, 20);
+camera.position.set(30, 30, 30);
 
 const orbit = new OrbitControls(camera, renderer.domElement);
 orbit.update();
 
-// const sun = new THREE.Mesh(
-//     new THREE.SphereGeometry(10, 30, 30),
-//     new THREE.MeshStandardMaterial({
-//         color: 0xffffff,
-//         emissive: 0xffe38f,
-//         emissiveIntensity: 1.5
-//     })
-// );
-// scene.add(sun);
-
-assetLoader.load('star.glb', (gltf) => {
-    const model = gltf.scene;
-    model.scale.set(10, 10, 10);
-    console.log(model)
-    model.children[0].material.emissiveIntensity = 1.2;
-    scene.add(model);
-});
+const sun = new THREE.Mesh(
+    new THREE.SphereGeometry(10, 30, 30),
+    new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        emissive: 0xffe38f,
+        emissiveIntensity: 1.5
+    })
+);
+scene.add(sun);
 
 const starClasses = [
     {
@@ -62,7 +54,7 @@ const starClasses = [
         temp: ">30,000K (Extremely Hot)",
         size: "Very Large",
         lifespan: "Short (<10M)",
-        color: 0x0000FF
+        color: 0x524fff
     },
     {
         type: "B",
@@ -70,7 +62,7 @@ const starClasses = [
         temp: "10,000K - 30,000K (Hot)",
         size: "Large",
         lifespan: "Moderate (10M - 100M)",
-        color: 0x9ACD32 
+        color: 0x5AB4FF 
     },
     {
         type: "A",
@@ -78,7 +70,7 @@ const starClasses = [
         temp: "7,500K - 10,000K (Hot)",
         size: "Medium to Large",
         lifespan: "Moderate (100M - 1B)",
-        color: 0xFFFF00 
+        color: 0xFFFFFF 
     },
     {
         type: "F",
@@ -86,7 +78,7 @@ const starClasses = [
         temp: "6,000K - 7,500K (Hot)",
         size: "Medium",
         lifespan: "Long (1B - 10B)",
-        color: 0xFFA500
+        color: 0xFFEF94
     },
     {
         type: "G",
@@ -122,14 +114,61 @@ function showNextStar() {
     document.getElementById("classification").querySelectorAll("p")[2].innerText = `Temperature: ${star.temp}`;
     document.getElementById("classification").querySelectorAll("p")[3].innerText = `Size: ${star.size}`;
     document.getElementById("classification").querySelectorAll("p")[4].innerText = `Lifespan: ${star.lifespan}`;
-    // sun.material.emissive.set(star.color)
+    sun.material.emissive.set(star.color)
     index = (index + 1) % starClasses.length;
     console.log(sun.material)
 
 }
 
+function showUI(){
+    let databox = document.querySelector("#classification");
+    if (databox.style.opacity == 0){
+        databox.style.visibility = "visible";
+        databox.style.opacity = 1;
+    } else {
+        databox.style.opacity = 0;
+    }
+}
+
+function revealButtons(){
+    const hidden = document.getElementsByClassName('gone');
+    for (let i = 0; i < hidden.length; i++){
+        hidden[i].style.visibility = "visible";
+    }
+    document.getElementById('popup').style.display = 'none'
+}
+
+document.getElementById('go').addEventListener('click', () => {
+    revealButtons();
+})
+
+document.getElementById('menu').addEventListener('click', () => {
+    showUI();
+});
+
 document.getElementById('nextStar').addEventListener('click', () => {
     showNextStar();
+})
+
+// const textbox = document.getElementsByClassName('textbox');
+// console.log(textbox.length)
+// for (let i = 0; i < textbox.length; i++){
+//     textbox[i].addEventListener('transititonend', (e) => {
+//         if (e.propertyName === 'opacity') {
+//             if (textbox.style.opacity === '0') {
+//                 textbox.style.visibility = 'hidden';
+//             }
+//         } 
+//     })
+// }
+
+let datafield = document.getElementById('classification');
+datafield.addEventListener('transitionend', (e) => {
+    if (e.propertyName === 'opacity'){
+        if (datafield.style.opacity === '0'){
+            datafield.style.visibility = 'hidden';
+        }
+    }
 })
 
 
