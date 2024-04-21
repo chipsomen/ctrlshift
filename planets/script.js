@@ -80,8 +80,6 @@ function restoreMaterial(obj){
 // initialize camera and objects
 camera.position.set(0, 12000, 0);
 
-const axesHelper = new THREE.AxesHelper(800);
-scene.add(axesHelper);
 const orbit = new OrbitControls(camera, renderer.domElement);
 orbit.update();
 const pointLight = new THREE.PointLight(0xFFFFFF, 5, 20000, 0);
@@ -96,19 +94,19 @@ function planetConstructor(size, planetType, pos, tilt, axial){
         const model = gltf.scene;
         model.scale.set(size*5, size*5, size*5);
         model.position.x = pos;
-        model.rotateZ = axial * Math.PI/180;
+        model.rotateZ(axial * Math.PI/180);
         console.log(`loaded ${planetType}`);
         if (planetType == 'earth') {
             model.children[0].material.emissiveIntensity = 10;
-            // assetLoader.load(`clouds.glb`, (gltf) => {
-            //     const cloud = gltf.scene;
-            //     cloud.scale.set(size*5, size*5, size*5);
-            //     cloud.position.x = pos;
-            //     cloud.rotateZ = axial * Math.PI/180;
-            //     cloud.children[0].material.color = 0xFFFFFF;
-            //     model.add(cloud);
-            //     console.log(cloud);
-            // });
+            assetLoader.load(`clouds.glb`, (gltf) => {
+                const cloud = gltf.scene;
+                cloud.scale.set(size*5+2, size*5+2, size*5+2);
+                cloud.position.x = pos;
+                cloud.rotateZ(axial * Math.PI/180);
+                cloud.children[0].material.color = 0xFFFFFF;
+                model.add(cloud);
+                console.log(cloud);
+            });
         };
 
         const orbit = new THREE.Mesh(
@@ -146,7 +144,7 @@ sun.layers.toggle(BLOOM_SCENE);
 // load planets
 const Load = {count: 0};
 Load.checkProgress = () => {
-    if (Load.count == 1){
+    if (Load.count == 8){
         let seconds = 1;
         let lScreen = document.getElementsByClassName('loader-container')[0];
 
