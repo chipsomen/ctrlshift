@@ -54,6 +54,7 @@ button:hover {
 
 .gone {
     visibility: hidden;
+    opacity: 0;
 }
 
 #dataWrapper {
@@ -64,6 +65,7 @@ button:hover {
     align-items: center;
     flex-direction: column;
     flex-direction: row-reverse;
+    transition: opacity 2s ease;
 }
 
 #menu {
@@ -196,12 +198,16 @@ button:hover {
 #starData {
     position: absolute;
     top: 10vh;
+    transition: opacity 2s ease;
+    opacity: 0;
 }
 
 #glossary {
     position: absolute;
     top: 10vh;
     right: 20vh;
+    transition: opacity 2s ease;
+    opacity: 0;
 }
 
 #glossaryBox {

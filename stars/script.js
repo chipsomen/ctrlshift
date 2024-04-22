@@ -176,6 +176,7 @@ function revealButtons(){
     const hidden = document.getElementsByClassName('gone');
     for (let i = 0; i < hidden.length; i++){
         hidden[i].style.visibility = "visible";
+        hidden[i].style.opacity = 1;
     }
     document.getElementById('popup').style.display = 'none'
 }
