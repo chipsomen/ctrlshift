@@ -22,14 +22,14 @@ a, a:visited {
 #border-area {
     background-color: rgba(0, 0, 0, 0.4);
     width: 30vw;
-    border-bottom-right-radius: 300px;
+    border-bottom-right-radius: 18.75rem;
 }
 
 #border-area div {
     background-color: rgba(0, 0, 0, 0.372);
     width: 26vw; height: 12vh;
     position: absolute;
-    border-bottom-right-radius: 300px;
+    border-bottom-right-radius: 18.75rem;
     z-index: -1;
 }
 
@@ -37,12 +37,12 @@ a, a:visited {
     background-color: rgb(0, 0, 0, 0);
     justify-content: end;
     position: relative;
-    right: 30px
+    right: 1.875rem;
 }
 
 #items p, a {
     font-family: 'Earth Orbiter Regular';
-    font-size: 25px;
+    font-size: 1.5625rem;
     transition-duration: 0.5s;
 }
 
@@ -51,22 +51,24 @@ a:hover {
     letter-spacing: 1mm;
 }
 
-#navbar p {
+#items p {
     margin: 0; padding: 0;
     display: inline-block;
-    margin-left: 30px;
+    margin-left: 1.8rem;
     color: white;
 }
 
 .title {
     font-family: 'Dash Horizon';
-    font-size: 45px;
+    font-size: 2.8rem;
     font-weight: normal;
     z-index: 1;
+    color: white;
+    margin-left: 1.8rem;
 }
 
 #menu {
-    font-size: 60px !important;
+    font-size: 3.75rem !important;
 }
 
 #info {
@@ -76,19 +78,65 @@ a:hover {
     display: flex;
     justify-content: end;
     text-align: center;
-    background: linear-gradient(
-        90deg,
-        rgb(30, 30, 30, 0) 5%,
-        rgb(0, 0, 0, 0.4) 20%,
-        rgb(0, 0, 0, 0.9) 100%
-    );
 }
 
 #info p {
     color: white;
-    margin-right: 100px;
-    max-width: 600px; max-height: 100vh;
+    margin-right: 6.25rem;
+    max-width: 37.5rem; max-height: 100vh;
     font-family: monospace;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 400;
+}
+
+@media only screen and (max-width: 600px) {
+    html {
+        font-size: 10px;
+    }
+
+    body {
+        background-image: url('images/earthmobile.png');
+    }
+
+    .title {
+        font-size: 2rem;
+        margin-left: 0;
+    }
+
+    #border-area {
+        width: auto;
+    }
+
+    #navbar {
+        flex-direction: column;
+    }
+
+    #items {
+        justify-content: center;
+        right: 0rem;
+    }
+
+    #items a {
+        font-size: 1rem;
+    }
+
+    #items p {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    #page {
+        display: flex;
+        justify-content: center;
+    }
+
+    #info {
+        position: static;
+    }
+
+    #info p {
+        margin: 0;
+        margin-top: 3rem;
+        font-size: 1.2rem;
+    }
 }
