@@ -6,7 +6,7 @@ import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 // initialize renderer
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x101e30);
+renderer.setClearColor(0x000000);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.5;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -89,20 +89,14 @@ for (let i = 0; i < textbox.length; i++){
 document.querySelector('#playButton .infoButton').addEventListener('click', toggle);
 let intro = false;
 
-let light = 13;
 const animate = () => {
     let rotateSpeed = 0.005;
-    let lightChange = 13/((Math.PI/4)/rotateSpeed);
     let title = document.getElementById('header')
     let info = document.getElementsByClassName('infoContainer');
     if (moonObj.rotation.x - rotateSpeed > 0 && !intro){
         moonObj.rotateX(-rotateSpeed);
-        renderer.setClearColor(new THREE.Color(`hsl(214, 100%, ${light}%)`));
-        console.log(light, lightChange, light - lightChange);
-        light = light - lightChange;
     } else if (moonObj.rotation.x > 0 && !intro){
         moonObj.rotation.x = 0;
-        renderer.setClearColor(0x000000);
         intro = true;
     } else if (moonObj.rotation.x == 0 && title.style.opacity !== 0){
         fadeIn(title, 1);
