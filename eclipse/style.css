@@ -152,9 +152,6 @@ h1 {
     position: absolute;
     left: 2.5vw; top: 8vh;
     width: 0px; height: 0px;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     flex-direction: column;
     z-index: 3;
 }

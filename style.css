@@ -4,7 +4,7 @@ body {
     background: black;
     background-image: url('images/image.png');
     background-size: cover;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 a, a:visited {

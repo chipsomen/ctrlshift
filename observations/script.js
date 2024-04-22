@@ -30,7 +30,6 @@ const bloomPass = new UnrealBloomPass(
     0.1
 );
 composer.addPass(renderScene);
-// composer.addPass(bloomPass);
 
 // initialize objects
 scene.add(worldAmbience);
@@ -58,10 +57,11 @@ camera.position.set(30, 30, 30);
 
 const orbit = new OrbitControls(camera, renderer.domElement);
 orbit.update();
+let scale = window.innerWidth/window.innerHeight < 0.75 ? 1.5:3
 
-loadTelescope('infrared', 1, [50, -50, 150]);
+loadTelescope('infrared', scale, [50, -50, 150]);
 loadTelescope('optical', 1, [200, -50, 1200]);
-loadTelescope('xray', 1, [350, -50, 1350]);
+loadTelescope('xray', scale/1.5, [350, -50, 1350]);
 loadTelescope('radio', 1, [500, -50, 1500]);
 
 // HTML JS
@@ -149,4 +149,5 @@ window.addEventListener('resize', function(){
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
+    console.log(window.innerWidth, window.innerHeight, camera.aspect)
 });

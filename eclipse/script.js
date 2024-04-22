@@ -22,12 +22,13 @@ const renderScene = new RenderPass(scene, camera);
 const composer = new EffectComposer(renderer);
 const bloomPass = new UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.6,
-    0.1,
-    0.1
+    1.6, // strength
+    0.1, // radius
+    0.1 // threshold
 );
 composer.addPass(renderScene);
 composer.addPass(bloomPass);
+console.log(bloomPass)
 
 camera.position.set(20, 10, 0);
 
