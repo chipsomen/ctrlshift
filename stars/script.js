@@ -1,7 +1,14 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+const {RenderPass} = await import('three/addons/postprocessing/RenderPass.js').then(async module => {
+    const pass = await module;
+    endLoading();
+    return pass
+}).catch(err => {
+    console.error('Error with loading RenderPass:', err);
+})
+// import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 
@@ -128,7 +135,19 @@ function showNextStar() {
     sun.material.emissive.set(star.color)
     index = (index + 1) % starClasses.length;
     console.log(sun.material)
+}
 
+function endLoading(){
+    let seconds = 1;
+    let lScreen = document.getElementsByClassName('loader-container')[0];
+
+    lScreen.style.transition = `opacity ${seconds}s ease`;
+    lScreen.style.opacity = 0;
+    
+    setTimeout(() => {
+        lScreen.style.display = "none";
+        document.getElementById("popup").style.display = 'flex';
+    }, (seconds) * 1000);
 }
 
 let activeGlossary = false;

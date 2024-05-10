@@ -136,6 +136,10 @@ const animate = () => {
         telescope.xray.rotateX(0.0001)
     }
 
+    if (Object.getOwnPropertyNames(telescope).length >= 4 && target == -1){
+        setTarget(1);
+    }
+
     composer.render();
     orbit.update();
     requestAnimationFrame(animate)

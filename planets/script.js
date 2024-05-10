@@ -153,7 +153,7 @@ Load.checkProgress = () => {
         setTimeout(() => {
             lScreen.style.display = "none";
             document.getElementsByClassName('container')[0].style.display = 'flex';
-        }, seconds * 1000);
+        }, (seconds + 1.5) * 1000);
     }
 }
 Load.updateProgress = () => {
