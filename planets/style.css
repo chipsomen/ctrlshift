@@ -56,6 +56,20 @@ body {
     animation: rotate-moon 3s linear infinite;
 }
 
+.loading {
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translate(-60%, -10%);
+    color: white;
+    font-family: "Earth Orbiter Regular";
+    text-align: center;
+    font-size: 2rem;
+    margin: 1rem;
+    z-index: 2;
+    visibility: visible;
+    opacity: 1;
+}
+
 @keyframes orbit {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -80,15 +94,15 @@ canvas {
 #scrolldiv {
     height: 100vh; 
     overflow-y: scroll;
-    direction: rtl;
+    direction: ltr;
 }
 
 .container {
     display: none;
     flex-direction: column;
-    padding-left: 30px;
+    padding-left: 2rem;
     overflow-y: auto;
-    direction: ltr;
+    direction: rtl;
 }
 
 .card {
@@ -119,14 +133,16 @@ img {
     transition: 0.5s;
 }
 
-h1 {
-    margin: 2px;
-    font-size: 20px;
+.intro h1 {
+    font-family: "Earth Orbiter Regular";
+    font-size: 1.5rem;
+    margin: 0.125rem;
 }
 
 p {
-    font-size: 12px;
-    margin: 4px;
+    font-family: "Trench Thin";
+    font-size: 1rem;
+    margin: 0.25rem;
     visibility: hidden;
     opacity: 0;
 }
@@ -283,6 +299,11 @@ span {
         height: 100vh; 
         overflow-y: scroll;
         direction: rtl;
+        width: 90vw;
+        position: absolute;
+        right: 0px;
+        overflow-x: scroll;
+        overflow-y: hidden;
     }
 
     .container {
@@ -291,11 +312,12 @@ span {
         padding-left: 30px;
         overflow-y: auto;
         direction: ltr;
+        width: max-content;
     }
 
     .card {
-        height: 10rem;
-        width: 10rem;
+        height: 11rem;
+        width: 11rem;
         margin: 10px;
         border-radius: 6px;
         box-shadow: 5px 5px 20px black;
@@ -304,7 +326,7 @@ span {
     }
 
     img {
-        height: 150px;
+        height: 11rem;
         width: 100%;
         border-radius: 6px;
         transition: 0.5s;
@@ -326,10 +348,10 @@ span {
         font-size: 16px;
     }
 
-    p {
+    /* p {
         font-size: 8px;
         margin: 4px;
         visibility: hidden;
         opacity: 0;
-    }
+    } */
 }

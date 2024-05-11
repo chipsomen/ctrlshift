@@ -66,6 +66,17 @@ h {
     animation: rotate-moon 3s linear infinite;
 }
 
+.loading {
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translate(-60%, -50%);
+    color: white;
+    font-family: "Earth Orbiter Regular";
+    text-align: center;
+    font-size: 2rem;
+    margin: 1rem;
+}
+
 @keyframes orbit {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -377,9 +388,9 @@ button:hover {
         top: 5vh; right: 18vw;
     }
 
-    /* #dataWrapper {
-        top: 50vh;
-    } */
+    #dataWrapper {
+        top: calc(50vh - 12rem);
+    }
 
     #starData {
         position: absolute;

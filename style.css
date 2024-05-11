@@ -5,6 +5,7 @@ body {
     background-image: url('images/image.png');
     background-size: cover;
     overflow: hidden;
+    user-select: none;
 }
 
 a, a:visited {
@@ -84,7 +85,8 @@ a:hover {
     color: white;
     margin-right: 6.25rem;
     max-width: 37.5rem; max-height: 100vh;
-    font-family: monospace;
+    font-family: "Trench Thin";
+    font-weight: 600;
     font-size: 1.25rem;
     font-weight: 400;
 }

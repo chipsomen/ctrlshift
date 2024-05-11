@@ -76,12 +76,14 @@ function restoreMaterial(obj){
     }
 }
 
+let scaleFactor = window.innerWidth/window.innerHeight < 0.75 ? 0.65:1;
+
+
 
 // initialize camera and objects
-camera.position.set(0, 12000, 0);
+camera.position.set(0, 12000/scaleFactor, 0);
+camera.lookAt(new THREE.Vector3(0,0,0))
 
-const orbit = new OrbitControls(camera, renderer.domElement);
-orbit.update();
 const pointLight = new THREE.PointLight(0xFFFFFF, 5, 20000, 0);
 scene.add(pointLight);
 const PLH = new THREE.PointLightHelper(pointLight);
@@ -157,18 +159,19 @@ Load.checkProgress = () => {
     }
 }
 Load.updateProgress = () => {
-    Load.count++
+    Load.count++;
     Load.checkProgress();
+    document.getElementsByClassName("loading")[0].textContent = `Loading Planets: ${Load.count}/8`
 }
 
-planetConstructor(5, 'mercury', 500, 0.001, 0);
-planetConstructor(15, 'venus', 1000, -0.001, 177.4);
-planetConstructor(20, 'earth', 1500, 0.002, 23.4);
-planetConstructor(10, 'mars', 2000, 0.001, 25.2);
-planetConstructor(45, 'jupiter', 3000, -0.0015, 3.1);
-planetConstructor(40, 'saturn', 3750, 0.003, 26.7);
-planetConstructor(22, 'uranus', 4250, 0.001, 97.8);
-planetConstructor(22, 'neptune', 4750,-0.0025, 28.3);
+planetConstructor(5 * scaleFactor, 'mercury', 500, 0.001, 0);
+planetConstructor(15 * scaleFactor, 'venus', 1000, -0.001, 177.4);
+planetConstructor(20 * scaleFactor, 'earth', 1500, 0.002, 23.4);
+planetConstructor(10 * scaleFactor, 'mars', 2000, 0.001, 25.2);
+planetConstructor(45 * scaleFactor, 'jupiter', 3000, -0.0015, 3.1);
+planetConstructor(40 * scaleFactor, 'saturn', 3750, 0.003, 26.7);
+planetConstructor(22 * scaleFactor, 'uranus', 4250, 0.001, 97.8);
+planetConstructor(22 * scaleFactor, 'neptune', 4750,-0.0025, 28.3);
 
 scene.add(sun);
 

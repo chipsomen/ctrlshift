@@ -8,7 +8,6 @@ const {RenderPass} = await import('three/addons/postprocessing/RenderPass.js').t
 }).catch(err => {
     console.error('Error with loading RenderPass:', err);
 })
-// import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 
