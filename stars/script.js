@@ -139,13 +139,18 @@ function showNextStar() {
 function endLoading(){
     let seconds = 1;
     let lScreen = document.getElementsByClassName('loader-container')[0];
+    let welcomeContainer = document.getElementById('popup');
+    let welcome = document.getElementById("about");
 
     lScreen.style.transition = `opacity ${seconds}s ease`;
     lScreen.style.opacity = 0;
     
     setTimeout(() => {
         lScreen.style.display = "none";
-        document.getElementById("popup").style.display = 'flex';
+        welcomeContainer.style.display = 'flex';
+        setTimeout(() => {
+            welcome.style.opacity = 1;
+        }, 100);
     }, (seconds) * 1000);
 }
 
@@ -158,6 +163,7 @@ function toggleGlossary(){
     if (!activeGlossary){
         glossary.style.visibility = "visible";
         glossary.style.opacity = 1;
+        glossary.style.height = '';
         outerButton.style.rotate = '-225deg';
         innerButton.style.transform = 'scale(0.5)';
         innerButton.style.opacity = 1;
@@ -186,6 +192,9 @@ function awaitTransitionEnd(e, el){
     if (e.propertyName === 'opacity'){
         if (el.style.opacity === '0'){
             el.style.visibility = 'hidden';
+                if (el.id == "glossaryBox"){
+                    el.style.height = '2rem';
+                }
         }
     }
 }
@@ -196,7 +205,10 @@ function revealButtons(){
         hidden[i].style.visibility = "visible";
         hidden[i].style.opacity = 1;
     }
-    document.getElementById('popup').style.display = 'none'
+    document.getElementById('about').style.opacity = 0;
+    setTimeout(() => {
+        document.getElementById('popup').style.display = 'none';
+    }, 1000);
 }
 
 document.getElementById('go').addEventListener('click', revealButtons);
@@ -206,6 +218,7 @@ document.getElementById('classification').addEventListener('transitionend', (e) 
     awaitTransitionEnd(e, document.getElementById('classification'));
 });
 document.getElementById('glossaryButton').addEventListener('click', toggleGlossary);
+document.getElementById("glossaryBox").style.height = '2rem';
 document.getElementById("glossaryBox").addEventListener('transitionend', (e) => {
     awaitTransitionEnd(e, document.getElementById("glossaryBox"));
 }) 

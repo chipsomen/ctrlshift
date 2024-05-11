@@ -1,7 +1,13 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+const {RenderPass} = await import('three/addons/postprocessing/RenderPass.js').then(async module => {
+    const pass = await module;
+    endLoading();
+    return pass
+}).catch(err => {
+    console.error('Error with loading RenderPass:', err);
+})
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 
@@ -80,6 +86,10 @@ document.getElementById('inc').addEventListener('click', () => {
 document.getElementById('dec').addEventListener('click', () => {
     setTarget(-1);
 });
+document.getElementById('go').addEventListener('click', () => {
+    document.getElementById('popup').style.display = 'none';
+});
+
 
 
 const scopeData = {
@@ -105,6 +115,25 @@ const scopeData = {
     }
 };
 
+function endLoading(){
+    let seconds = 0.5;
+    let lScreen = document.getElementsByClassName('loader-container')[0];
+    let welcomeContainer = document.getElementById('popup');
+    let welcome = document.getElementById("about");
+
+    lScreen.style.transition = `opacity ${seconds}s ease`;
+    lScreen.style.opacity = 0;
+    
+    setTimeout(() => {
+        lScreen.style.display = "none";
+        welcomeContainer.style.display = 'flex';
+        document.body.style.display = 'flex';
+        document.body.style.justifyContent = 'center';
+        setTimeout(() => {
+            welcome.style.opacity = 1;
+        }, 100);
+    }, (seconds) * 1000);
+}
 
 // Animation Loop
 const animate = () => {

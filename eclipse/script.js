@@ -1,5 +1,11 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
-import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+const {RenderPass} = await import('three/addons/postprocessing/RenderPass.js').then(async module => {
+    const pass = await module;
+    endLoading();
+    return pass
+}).catch(err => {
+    console.error('Error with loading RenderPass:', err);
+})
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 
@@ -64,6 +70,7 @@ function fadeIn(el, s){
 }
 
 let active = false;
+let reset = false;
 function toggle(){
     let toggle = document.querySelector('#playButton .infoButton .inner')
     active = !active
@@ -76,8 +83,19 @@ function toggle(){
     }
 }
 
-const textbox = document.getElementsByClassName('textbox');
+function endLoading(){
+    let seconds = 0.5;
+    let lScreen = document.getElementsByClassName('loader-container')[0];
 
+    lScreen.style.transition = `opacity ${seconds}s ease`;
+    lScreen.style.opacity = 0;
+    
+    setTimeout(() => {
+        lScreen.style.display = "none";;
+    }, (seconds) * 1000);
+}
+
+const textbox = document.getElementsByClassName('textbox');
 for (let i = 0; i < textbox.length; i++){
     textbox[i].addEventListener('transititonend', (e) => {
         if (e.propertyName === 'opacity') {
@@ -88,6 +106,13 @@ for (let i = 0; i < textbox.length; i++){
     })
 }
 document.querySelector('#playButton .infoButton').addEventListener('click', toggle);
+document.querySelector('#playButton .infoButton').addEventListener('dblclick', () => {
+    let toggle = document.querySelector('#playButton .infoButton .inner')
+    active = false;
+    toggle.style.transform = "";
+    toggle.style['background-color'] = "";
+    reset = true;
+});
 let intro = false;
 
 const animate = () => {
@@ -111,6 +136,11 @@ const animate = () => {
         if (moonObj.rotation.x <= -Math.PI/2){
             moonObj.rotation.x = Math.PI/2;
         }
+    }
+    if (reset) {
+        moonObj.rotation.x = Math.PI/6;
+        intro = false;
+        reset = false;
     }
 
     composer.render();

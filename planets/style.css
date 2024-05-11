@@ -1,6 +1,6 @@
 body {
     padding: 0; margin: 0;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     overflow-x: hidden;
     user-select: none;
 }
@@ -19,7 +19,7 @@ body {
     position: relative;
 }
 
-.orbit {
+.loadOrbit {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -30,7 +30,7 @@ body {
     animation: orbit 6s linear infinite;
 }
 
-.planet {
+.planetary {
     position: absolute;
     top: 58%;
     left: 50%;
@@ -133,13 +133,13 @@ img {
     transition: 0.5s;
 }
 
-.intro h1 {
+.intro h1{
     font-family: "Earth Orbiter Regular";
     font-size: 1.5rem;
     margin: 0.125rem;
 }
 
-p {
+.intro p {
     font-family: "Trench Thin";
     font-size: 1rem;
     margin: 0.25rem;
@@ -284,137 +284,6 @@ span {
     opacity: 1;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #a67c7c;
-}
-
-.menu {
-    position: relative;
-    width: 400px; 
-    height: 400px; 
-
-.orbit {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.planet {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: #ffffff;
-}
-
-.planet:hover {
-    cursor: pointer;
-}
-
-.text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(0, 0, 0);
-    font-family: monospace;
-    font-size: 13px;
-    font-weight: bold;
-    opacity: 1; 
-}
-
-.orbitline1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300px;
-    height: 300px;
-    border: 2px dashed #fff;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.orbitline2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 250px;
-    height: 250px;
-    border: 2px dashed #fff;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.orbitline3 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    height: 200px;
-    border: 2px dashed #fff;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.orbitline4 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 150px;
-    height: 150px;
-    border: 2px dashed #fff;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.sun {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    background-color: #ffffff;
-    border: 2px dashed #bebcbc;
-    border-radius: 50%;
-    animation: rotate-sun 10s linear infinite;
-}
-
-@keyframes rotate-sun {
-     0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-.planet1 {
-    top: 100px;
-    left: 65px;
-}
-
-.planet2 {
-    top: 270px;
-    left: 95px;
-}
-
-.planet3 {
-    top: 160px;
-    left: 287px;
-}
-
-.planet4 {
-    top: 260px;
-    left: 200px;
-}
-
-
 @media only screen and (max-width: 600px) {
     html {
         font-size: 10px;
@@ -478,11 +347,4 @@ body {
         margin: 2px;
         font-size: 16px;
     }
-
-    /* p {
-        font-size: 8px;
-        margin: 4px;
-        visibility: hidden;
-        opacity: 0;
-    } */
 }

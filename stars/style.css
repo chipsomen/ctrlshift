@@ -167,21 +167,20 @@ button:hover {
 #popup {
     position: absolute;
     width: 100vw;
-    height: 80vh;
-    display: flex;
+    height: 100vh;
     justify-content: center;
     align-items: center;
-    opacity: 1;
     display: none;
 }
 
 #about {
-    opacity: 1;
+    transition: opacity 0.5s ease;
+    opacity: 0;
 }
 
 #classification {
     transition: opacity 0.5s ease, transform 0.5s;
-    height: 18.75rem;
+    max-height: 20rem;
 }
 
 .button {
@@ -396,6 +395,7 @@ button:hover {
         position: absolute;
         flex-direction: column-reverse;
         bottom: 5vh; right: 10vh;
+        top: auto;
     }
 
     #classification {
